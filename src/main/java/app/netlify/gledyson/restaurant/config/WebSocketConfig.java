@@ -16,7 +16,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // WebSocket (or SockJS) client will need to connect to for the WebSocket handshake.
         registry
                 .addEndpoint("/restaurant")
-                .setAllowedOrigins("http://127.0.0.1:5500")
+                .setAllowedOrigins("http://localhost:3000")
                 .withSockJS();
     }
 

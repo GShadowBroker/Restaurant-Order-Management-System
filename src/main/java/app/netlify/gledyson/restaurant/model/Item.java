@@ -10,6 +10,9 @@ public class Item {
     private Long id;
 
     @Column(unique = true, nullable = false)
+    private String code;
+
+    @Column(unique = true, nullable = false)
     private String name;
 
     private String description;
@@ -21,15 +24,17 @@ public class Item {
     public Item() {
     }
 
-    public Item(String name, String description, String imageUrl, Integer price) {
+    public Item(String code, String name, String description, String imageUrl, Integer price) {
+        this.code = code;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
     }
 
-    public Item(Long id, String name, String description, String imageUrl, Integer price) {
+    public Item(Long id, String code, String name, String description, String imageUrl, Integer price) {
         this.id = id;
+        this.code = code;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
@@ -42,6 +47,14 @@ public class Item {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

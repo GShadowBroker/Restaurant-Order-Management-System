@@ -1,6 +1,7 @@
 package app.netlify.gledyson.restaurant.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class Customer {
     private String lastName;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private List<CustomerOrder> customerOrders;
+    private List<CustomerOrder> customerOrders = new ArrayList<>();
 
     public Customer() {
     }
@@ -33,6 +34,11 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.customerOrders = customerOrders;
+    }
+
+    public Customer(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public UUID getId() {

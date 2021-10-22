@@ -1,6 +1,7 @@
 package app.netlify.gledyson.restaurant.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,20 +16,27 @@ public class CustomerOrder {
     private Customer customer;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
+
+    private String observation;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.IN_QUEUE;
 
     public CustomerOrder() {
     }
 
-    public CustomerOrder(Customer customer, List<Item> items) {
-        this.customer = customer;
-        this.items = items;
-    }
-
-    public CustomerOrder(Long id, Customer customer, List<Item> items) {
+    public CustomerOrder(Long id, Customer customer, List<Item> items, String observation) {
         this.id = id;
         this.customer = customer;
         this.items = items;
+        this.observation = observation;
+    }
+
+    public CustomerOrder(Customer customer, List<Item> items, String observation) {
+        this.customer = customer;
+        this.items = items;
+        this.observation = observation;
     }
 
     public Customer getCustomer() {
@@ -55,12 +63,29 @@ public class CustomerOrder {
         this.items = items;
     }
 
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
     @Override
     public String toString() {
         return "CustomerOrder{" +
                 "id=" + id +
                 ", customer=" + customer +
                 ", items=" + items +
+                ", status=" + status +
                 '}';
     }
 }

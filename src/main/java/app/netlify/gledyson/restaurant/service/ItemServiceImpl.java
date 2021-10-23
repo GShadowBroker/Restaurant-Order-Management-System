@@ -4,6 +4,7 @@ import app.netlify.gledyson.restaurant.exception.ItemNotFoundException;
 import app.netlify.gledyson.restaurant.model.Item;
 import app.netlify.gledyson.restaurant.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,4 +30,10 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> getAll() {
         return repository.findAll();
     }
+
+    @Override
+    public List<Item> getSome(int limit, int offset) {
+        return repository.getSome(PageRequest.of(offset, limit));
+    }
+
 }

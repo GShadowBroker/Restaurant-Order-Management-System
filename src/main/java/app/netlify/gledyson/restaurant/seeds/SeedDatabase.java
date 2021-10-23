@@ -26,27 +26,43 @@ public class SeedDatabase {
             log.info("Seeding database...");
 
             // ITEMS
-            Item bananaBeef = new Item(
+            Item camarao = new Item(
                     "0377E",
-                    "Banana Beef Pudding",
-                    "Restores 0 health and 0 mana over 20 sec. Must remain seated while eating. If you spend at least 10 seconds eating you will become well fed and gain 0 Stamina for 60 min.",
-                    "https://icons.wowdb.com/retail/large/inv_cooking_90_bananabeefpudding.jpg?40593",
+                    "Camarão em Crosta",
+                    "Camarões em crosta de pão de alho. Acompanha salada de alface americana, tomate, azeitona verde, palmito, pimentão e cebola. Acompanha e risoto de limão siciliano.",
+                    "https://cocobambu.com/wp-content/uploads/2021/04/card-cam-camarao-em-crosta.jpeg",
                     3990
             );
 
-            Item iridescentRavioli = new Item(
+            Item paillard = new Item(
                     "0378R",
-                    "Iridescent Ravioli with Apple Sauce",
-                    "Restores 0 health and 0 mana over 20 sec. Must remain seated while eating. If you spend at least 10 seconds eating you will become well fed and gain 0 Mastery for 60 min.",
-                    "https://icons.wowdb.com/retail/large/inv_cooking_90_crawlerravioliapplesauce.jpg?40593",
+                    "Paillard de Frango",
+                    "400g de filé de frango grelhado sobre espaguete italiano e folhas de espinafre, servido com molho de limão siciliano.",
+                    "https://cocobambu.com/wp-content/uploads/2021/04/card-fran-paillard_frango.jpeg",
                     7990
             );
 
-            Item darkhavenStout = new Item(
+            Item escondidinho = new Item(
                     "1854E",
-                    "Darkhaven Stout",
-                    "A strong alcoholic beverage.",
-                    "https://icons.wowdb.com/retail/large/spell_misc_drink.jpg?40593",
+                    "Escondidinho de Bacalhau",
+                    "Bacalhau desfiado e refogado com cebola, azeitona preta, coentro, nata e molho bechamel. Coberto com purê de batata e gratinado com queijo parmesão.",
+                    "https://cocobambu.com/wp-content/uploads/2021/04/card-esc-escondidinho-de-bacalhau.jpeg",
+                    3990
+            );
+
+            Item salada = new Item(
+                    "8801E",
+                    "Salada Tropical",
+                    "10 camarões grelhados, folhas verdes, manga, tomate cereja, cenoura e castanha de caju. Temperada com molho especial com tomate e azeite.",
+                    "https://cocobambu.com/wp-content/uploads/2021/04/cardapio-salada-tropical.jpeg",
+                    1190
+            );
+
+            Item gateau = new Item(
+                    "0366E",
+                    "Petit Gateau de Amêndoas e Limão Siciliano",
+                    "Bolinho quente de amêndoas, com recheio de chocolate branco e coberto com raspas de limão siciliano. Acompanha sorvete de creme.",
+                    "https://cocobambu.com/wp-content/uploads/2021/04/card-sobr-petit-de-amendoas-e-limao.jpeg",
                     790
             );
 
@@ -56,7 +72,7 @@ public class SeedDatabase {
             Customer ana = new Customer("Ana", "Paula");
 
             itemRepository.saveAll(
-                    List.of(bananaBeef, iridescentRavioli, darkhavenStout)
+                    List.of(camarao, paillard, escondidinho, salada, gateau)
             );
             customerRepository.saveAll(List.of(maria, joao, ana));
         };

@@ -5,6 +5,7 @@ import app.netlify.gledyson.restaurant.model.Customer;
 import app.netlify.gledyson.restaurant.model.CustomerOrder;
 import app.netlify.gledyson.restaurant.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,5 +31,10 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CustomerOrder> getCustomerOrders(UUID customerId) {
         Customer customer = getCustomerById(customerId);
         return customer.getOrders();
+    }
+
+    @Override
+    public List<Customer> getCustomers(int offset, int limit) {
+        return repository.getSome(PageRequest.of(offset, limit));
     }
 }

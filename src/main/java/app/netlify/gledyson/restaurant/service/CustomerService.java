@@ -10,5 +10,5 @@ public interface CustomerService {
 
     Customer getCustomerById(UUID customerId);
     List<CustomerOrder> getCustomerOrders(UUID customerId);
-
+    List<Customer> getCustomers(int offset, int limit);
 }

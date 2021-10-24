@@ -37,12 +37,17 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     }
 
     @Override
-    public void createNewOrder(UUID customerId, List<Item> items, String observation) {
+    public List<CustomerOrder> getCustomerOrders() {
+        return repository.findAll();
+    }
+
+    @Override
+    public CustomerOrder createNewOrder(UUID customerId, List<Item> items, String observation) {
         Customer customer = customerService.getCustomerById(customerId);
 
         CustomerOrder order = new CustomerOrder(customer, items, observation);
 
-        repository.save(order);
+        return repository.save(order);
     }
 
     @Override

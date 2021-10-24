@@ -1,5 +1,6 @@
 package app.netlify.gledyson.restaurant.controller;
 
+import app.netlify.gledyson.restaurant.model.CustomerOrder;
 import app.netlify.gledyson.restaurant.model.OrderForm;
 import app.netlify.gledyson.restaurant.service.CustomerOrderService;
 import org.slf4j.Logger;
@@ -30,10 +31,11 @@ public class OrderWebSocketController {
     }
 
     @MessageMapping("order")
-    public void makeOrder(OrderForm orderForm) {
+    @SendTo("/topic/order")
+    public CustomerOrder makeOrder(OrderForm orderForm) {
         log.info("Requesting new order: {}", orderForm);
 
-        orderService.createNewOrder(
+        return orderService.createNewOrder(
                 orderForm.getCustomerId(),
                 orderForm.getItems(),
                 orderForm.getObservation()

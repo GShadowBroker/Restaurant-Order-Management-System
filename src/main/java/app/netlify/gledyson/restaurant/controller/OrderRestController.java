@@ -1,9 +1,10 @@
 package app.netlify.gledyson.restaurant.controller;
 
-import app.netlify.gledyson.restaurant.model.Item;
-import app.netlify.gledyson.restaurant.model.LimitOffsetForm;
-import app.netlify.gledyson.restaurant.service.ItemService;
+import app.netlify.gledyson.restaurant.model.CustomerOrder;
+import app.netlify.gledyson.restaurant.model.OrderForm;
+import app.netlify.gledyson.restaurant.service.CustomerOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,20 +14,23 @@ import java.util.List;
 public class OrderRestController {
 
     @Autowired
-    ItemService itemService;
+    CustomerOrderService customerOrderService;
 
-    @GetMapping("items")
+    @GetMapping
     @CrossOrigin
-    public List<Item> getAllItems() {
-        return itemService.getAll();
+    public List<CustomerOrder> getAll() {
+        return customerOrderService.getCustomerOrders();
     }
 
-    @GetMapping("items/some")
+    @PostMapping
     @CrossOrigin
-    public List<Item> getSomeItems(
-            @RequestParam(name = "limit", required = false, defaultValue = "5") int limit,
-            @RequestParam(name = "offset", required = false, defaultValue = "0") int offset
-    ) {
-        return itemService.getSome(limit, offset);
+    @Transactional
+    public CustomerOrder createNewOrder(@RequestBody OrderForm form) {
+        return customerOrderService.createNewOrder(
+                form.getCustomerId(),
+                form.getItems(),
+                form.getObservation()
+        );
     }
+
 }

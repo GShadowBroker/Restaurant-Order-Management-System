@@ -1,11 +1,13 @@
 package app.netlify.gledyson.restaurant.controller;
 
 import app.netlify.gledyson.restaurant.model.Customer;
+import app.netlify.gledyson.restaurant.model.CustomerOrder;
 import app.netlify.gledyson.restaurant.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/customer")
@@ -23,4 +25,8 @@ public class CustomerRestController {
         return customerService.getCustomers(offset, limit);
     }
 
+    @GetMapping("/{customerId}/order")
+    public List<CustomerOrder> getOrders(@PathVariable String customerId) {
+        return customerService.getCustomerOrders(UUID.fromString(customerId));
+    }
 }

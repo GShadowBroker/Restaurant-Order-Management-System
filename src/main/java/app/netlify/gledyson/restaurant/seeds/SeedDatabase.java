@@ -67,9 +67,9 @@ public class SeedDatabase {
             );
 
             // CUSTOMERS
-            Customer maria = new Customer("Maria", "Silva");
-            Customer joao = new Customer("João", "Santos");
-            Customer ana = new Customer("Ana", "Paula");
+            Customer maria = new Customer("Maria", "Silva", List.of());
+            Customer joao = new Customer("João", "Santos", List.of());
+            Customer ana = new Customer("Ana", "Paula", List.of());
 
             itemRepository.saveAll(
                     List.of(camarao, paillard, escondidinho, salada, gateau)

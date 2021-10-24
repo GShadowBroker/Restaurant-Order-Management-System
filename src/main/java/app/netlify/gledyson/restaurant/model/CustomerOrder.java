@@ -1,21 +1,22 @@
 package app.netlify.gledyson.restaurant.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table
-public class CustomerOrder {
+public class CustomerOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Item> items = new ArrayList<>();
 
     private String observation;
@@ -85,6 +86,7 @@ public class CustomerOrder {
                 "id=" + id +
                 ", customer=" + customer +
                 ", items=" + items +
+                ", observation='" + observation + '\'' +
                 ", status=" + status +
                 '}';
     }

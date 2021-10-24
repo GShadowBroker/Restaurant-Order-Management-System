@@ -1,13 +1,13 @@
 package app.netlify.gledyson.restaurant.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,8 +17,8 @@ public class Customer {
 
     private String lastName;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<CustomerOrder> customerOrders = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<CustomerOrder> customerOrders;
 
     public Customer() {
     }
@@ -34,11 +34,6 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.customerOrders = customerOrders;
-    }
-
-    public Customer(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
     public UUID getId() {
@@ -65,11 +60,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public List<CustomerOrder> getOrders() {
+    public List<CustomerOrder> getCustomerOrders() {
         return customerOrders;
     }
 
-    public void setOrders(List<CustomerOrder> customerOrders) {
+    public void setCustomerOrders(List<CustomerOrder> customerOrders) {
         this.customerOrders = customerOrders;
     }
 

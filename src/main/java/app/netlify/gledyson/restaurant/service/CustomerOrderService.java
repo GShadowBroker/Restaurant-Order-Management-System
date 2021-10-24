@@ -9,7 +9,12 @@ import java.util.UUID;
 
 public interface CustomerOrderService {
     CustomerOrder getCustomerOrderById(long id);
-    void createNewOrder(UUID customerId, List<Item> items, String observation);
+
+    List<CustomerOrder> getCustomerOrders();
+
+    CustomerOrder createNewOrder(UUID customerId, List<Item> items, String observation);
+
     void updateStatus(long orderId, OrderStatus newStatus);
+
     void deleteOrderById(long orderId);
 }

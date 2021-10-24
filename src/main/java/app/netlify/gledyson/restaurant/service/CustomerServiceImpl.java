@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerOrder> getCustomerOrders(UUID customerId) {
         Customer customer = getCustomerById(customerId);
-        return customer.getOrders();
+        return customer.getCustomerOrders();
     }
 
     @Override

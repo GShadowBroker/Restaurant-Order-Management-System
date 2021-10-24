@@ -18,7 +18,7 @@ import java.util.UUID;
 public class CustomerOrderServiceImpl implements CustomerOrderService {
 
     @Autowired
-    private CustomerOrderRepository repository;
+    private CustomerOrderRepository orderRepository;
 
     @Autowired
     private CustomerService customerService;
@@ -27,7 +27,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 
     @Override
     public CustomerOrder getCustomerOrderById(long id) {
-        return repository
+        return orderRepository
                 .findById(id)
                 .orElseThrow(() -> {
                     throw new CustomerOrderNotFoundException(
@@ -38,7 +38,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 
     @Override
     public List<CustomerOrder> getCustomerOrders() {
-        return repository.findAll();
+        return orderRepository.findAll();
     }
 
     @Override
@@ -47,16 +47,16 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 
         CustomerOrder order = new CustomerOrder(customer, items, observation);
 
-        return repository.save(order);
+        return orderRepository.save(order);
     }
 
     @Override
     public void updateStatus(long orderId, OrderStatus newStatus) {
-        repository.updateStatus(orderId, newStatus.name());
+        orderRepository.updateStatus(orderId, newStatus.name());
     }
 
     @Override
     public void deleteOrderById(long orderId) {
-        repository.deleteById(orderId);
+        orderRepository.deleteById(orderId);
     }
 }

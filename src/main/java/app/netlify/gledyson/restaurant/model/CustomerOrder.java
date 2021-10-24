@@ -1,13 +1,11 @@
 package app.netlify.gledyson.restaurant.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
-public class CustomerOrder implements Serializable {
+public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

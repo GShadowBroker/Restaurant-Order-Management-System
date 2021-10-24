@@ -4,6 +4,8 @@ import app.netlify.gledyson.restaurant.exception.CustomerNotFoundException;
 import app.netlify.gledyson.restaurant.model.Customer;
 import app.netlify.gledyson.restaurant.model.CustomerOrder;
 import app.netlify.gledyson.restaurant.repository.CustomerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import java.util.UUID;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+    Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
+
     @Autowired
     CustomerRepository repository;
 
@@ -21,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(UUID customerId) {
+        log.info("Fetching user {}", customerId.toString());
         return repository.findById(customerId)
                 .orElseThrow(() -> {
                     throw new CustomerNotFoundException(String.format(CUSTOMER_NOT_FOUND, customerId));

@@ -1,13 +1,13 @@
 package app.netlify.gledyson.restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table
-public class Customer implements Serializable {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +17,12 @@ public class Customer implements Serializable {
 
     private String lastName;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "customer",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
     private List<CustomerOrder> customerOrders;
 
     public Customer() {

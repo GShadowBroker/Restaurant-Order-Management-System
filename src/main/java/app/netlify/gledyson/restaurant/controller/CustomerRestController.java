@@ -26,6 +26,7 @@ public class CustomerRestController {
     }
 
     @GetMapping("/{customerId}/order")
+    @CrossOrigin
     public List<CustomerOrder> getOrders(@PathVariable String customerId) {
         return customerService.getCustomerOrders(UUID.fromString(customerId));
     }

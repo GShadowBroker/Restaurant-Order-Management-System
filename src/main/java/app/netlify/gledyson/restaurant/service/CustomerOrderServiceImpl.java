@@ -6,6 +6,8 @@ import app.netlify.gledyson.restaurant.model.CustomerOrder;
 import app.netlify.gledyson.restaurant.model.Item;
 import app.netlify.gledyson.restaurant.model.OrderStatus;
 import app.netlify.gledyson.restaurant.repository.CustomerOrderRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,8 @@ import java.util.UUID;
 @Service
 @Transactional
 public class CustomerOrderServiceImpl implements CustomerOrderService {
+
+    Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
     @Autowired
     private CustomerOrderRepository orderRepository;
@@ -51,8 +55,18 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     }
 
     @Override
-    public void updateStatus(long orderId, OrderStatus newStatus) {
-        orderRepository.updateStatus(orderId, newStatus.name());
+    public void updateStatus(long orderId, String newStatus) throws IllegalArgumentException {
+        log.info("attempting to update status to {}", newStatus);
+
+        OrderStatus status = switch (newStatus) {
+            case ("PREPARING") -> OrderStatus.PREPARING;
+            case ("IN_QUEUE") -> OrderStatus.IN_QUEUE;
+            case ("AWAITING_DELIVERY") -> OrderStatus.AWAITING_DELIVERY;
+            case ("DELIVERED") -> OrderStatus.DELIVERED;
+            default -> OrderStatus.PENDING;
+        };
+
+        orderRepository.updateStatus(orderId, status);
     }
 
     @Override

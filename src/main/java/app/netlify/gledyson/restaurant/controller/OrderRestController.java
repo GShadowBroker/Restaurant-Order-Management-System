@@ -33,4 +33,11 @@ public class OrderRestController {
         );
     }
 
+    @PutMapping("/{orderId}")
+    @CrossOrigin
+    @Transactional
+    public void updateState(@PathVariable long orderId, @RequestParam String status) {
+        customerOrderService.updateStatus(orderId, status);
+    }
+
 }

@@ -14,7 +14,7 @@ public interface CustomerOrderService {
 
     CustomerOrder createNewOrder(UUID customerId, List<Item> items, String observation);
 
-    void updateStatus(long orderId, OrderStatus newStatus);
+    void updateStatus(long orderId, String newStatus);
 
     void deleteOrderById(long orderId);
 }

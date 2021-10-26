@@ -13,4 +13,9 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query("SELECT i FROM Item i")
     List<Item> getSome(Pageable pageable);
+
+    @Query("SELECT i FROM Item i " +
+            "WHERE i.code = ?1 " +
+            "OR UPPER(i.name) LIKE UPPER(CONCAT('%',?1,'%'))")
+    List<Item> searchItems(String searchTerm, Pageable pageable);
 }

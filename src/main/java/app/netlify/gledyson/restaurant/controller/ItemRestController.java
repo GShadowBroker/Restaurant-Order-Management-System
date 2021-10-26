@@ -28,4 +28,14 @@ public class ItemRestController {
     ) {
         return itemService.getSome(limit, offset);
     }
+
+    @GetMapping("search")
+    @CrossOrigin
+    public List<Item> searchItems(
+            @RequestParam(name = "term") String term,
+            @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
+            @RequestParam(name = "offset", required = false, defaultValue = "0") int offset
+    ) {
+        return itemService.searchItems(term, limit, offset);
+    }
 }

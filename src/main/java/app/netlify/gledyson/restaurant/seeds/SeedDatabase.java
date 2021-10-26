@@ -15,7 +15,7 @@ import java.util.List;
 @Configuration
 public class SeedDatabase {
 
-    Logger log = LoggerFactory.getLogger(SeedDatabase.class);
+    private final Logger log = LoggerFactory.getLogger(SeedDatabase.class);
 
     @Bean
     CommandLineRunner run(

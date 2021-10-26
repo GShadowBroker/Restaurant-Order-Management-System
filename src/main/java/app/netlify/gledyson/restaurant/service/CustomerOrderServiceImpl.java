@@ -20,7 +20,7 @@ import java.util.UUID;
 @Transactional
 public class CustomerOrderServiceImpl implements CustomerOrderService {
 
-    Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
     @Autowired
     private CustomerOrderRepository orderRepository;

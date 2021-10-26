@@ -14,10 +14,10 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    Logger log = LoggerFactory.getLogger(ItemServiceImpl.class);
-
     @Autowired
     private ItemRepository itemRepository;
+
+    private final Logger log = LoggerFactory.getLogger(ItemServiceImpl.class);
 
     private static final String ITEM_NOT_FOUND = "Item '%s' not found";
 

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @CrossOrigin
 public class OrderWebSocketController {
 
-    private Logger log = LoggerFactory.getLogger(OrderWebSocketController.class);
+    private final Logger log = LoggerFactory.getLogger(OrderWebSocketController.class);
 
     @Autowired
     CustomerOrderService orderService;

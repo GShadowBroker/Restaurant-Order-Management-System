@@ -1,6 +1,7 @@
 package app.netlify.gledyson.restaurant.service;
 
 import app.netlify.gledyson.restaurant.exception.CustomerOrderNotFoundException;
+import app.netlify.gledyson.restaurant.exception.RedundantStatusUpdateException;
 import app.netlify.gledyson.restaurant.model.Customer;
 import app.netlify.gledyson.restaurant.model.CustomerOrder;
 import app.netlify.gledyson.restaurant.model.Item;
@@ -28,6 +29,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     private CustomerService customerService;
 
     private static final String CUSTOMER_ORDER_NOT_FOUND = "Order '%s' not found";
+    private static final String REDUNDANT_STATUS_UPDATE = "Cannot update order status to the same previous value '%s'";
 
     @Override
     public CustomerOrder getCustomerOrderById(long id) {
@@ -42,7 +44,12 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 
     @Override
     public List<CustomerOrder> getCustomerOrders() {
-        return orderRepository.findAll();
+        List<CustomerOrder> orders = orderRepository.findAll();
+
+        // sort by id in ascending order
+        orders.sort((a, b) -> (int) (a.getId() - b.getId()));
+
+        return orders;
     }
 
     @Override
@@ -55,8 +62,9 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     }
 
     @Override
-    public void updateStatus(long orderId, String newStatus) throws IllegalArgumentException {
-        log.info("attempting to update status to {}", newStatus);
+    public void updateStatus(long orderId, String newStatus) {
+
+        CustomerOrder order = getCustomerOrderById(orderId);
 
         OrderStatus status = switch (newStatus) {
             case ("PREPARING") -> OrderStatus.PREPARING;
@@ -66,7 +74,14 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
             default -> OrderStatus.PENDING;
         };
 
-        orderRepository.updateStatus(orderId, status);
+        if (order.getStatus().toString().equals(status.toString())) {
+            String exceptionMessage = String
+                    .format(REDUNDANT_STATUS_UPDATE, status);
+            log.info(exceptionMessage);
+            throw new RedundantStatusUpdateException(exceptionMessage);
+        }
+
+        orderRepository.updateStatus(order.getId(), status);
     }
 
     @Override

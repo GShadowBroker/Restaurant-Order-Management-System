@@ -20,7 +20,8 @@ public class CustomerOrder {
     private String observation;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status = OrderStatus.IN_QUEUE;
+    @Column(nullable = false)
+    private OrderStatus status = OrderStatus.PENDING;
 
     public CustomerOrder() {
     }
@@ -85,7 +86,7 @@ public class CustomerOrder {
                 ", customer=" + customer +
                 ", items=" + items +
                 ", observation='" + observation + '\'' +
-                ", status=" + status +
+                ", status=" + status.toString() +
                 '}';
     }
 }

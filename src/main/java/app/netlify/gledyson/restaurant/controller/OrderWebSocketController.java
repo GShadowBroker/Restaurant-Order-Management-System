@@ -22,15 +22,7 @@ public class OrderWebSocketController {
     @Autowired
     CustomerOrderService orderService;
 
-    @MessageMapping("greeting")
-    @SendTo("/topic/chat")
-    public String handle(String greeting) throws InterruptedException {
-        log.info("GREETING ENDPOINT CALLED!!!");
-        Thread.sleep(1000);
-        return "" + LocalDateTime.now() + ": " + greeting;
-    }
-
-    @MessageMapping("order")
+    @MessageMapping("order/add")
     @SendTo("/topic/order")
     public CustomerOrder makeOrder(OrderForm orderForm) {
         log.info("Requesting new order: {}", orderForm);
@@ -40,5 +32,13 @@ public class OrderWebSocketController {
                 orderForm.getItems(),
                 orderForm.getObservation()
         );
+    }
+
+    @MessageMapping("order/notify")
+    @SendTo("/topic/order")
+    public String notifyOrderStatusChanged() {
+        log.info("Notifying all subscribers about order status update");
+
+        return "done";
     }
 }

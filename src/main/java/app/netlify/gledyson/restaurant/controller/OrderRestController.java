@@ -4,7 +4,6 @@ import app.netlify.gledyson.restaurant.model.CustomerOrder;
 import app.netlify.gledyson.restaurant.model.OrderForm;
 import app.netlify.gledyson.restaurant.service.CustomerOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +23,6 @@ public class OrderRestController {
 
     @PostMapping
     @CrossOrigin
-    @Transactional
     public CustomerOrder createNewOrder(@RequestBody OrderForm form) {
         return customerOrderService.createNewOrder(
                 form.getCustomerId(),
@@ -35,9 +33,14 @@ public class OrderRestController {
 
     @PutMapping("/{orderId}")
     @CrossOrigin
-    @Transactional
     public void updateState(@PathVariable long orderId, @RequestParam String status) {
         customerOrderService.updateStatus(orderId, status);
+    }
+
+    @DeleteMapping("/{orderId}")
+    @CrossOrigin
+    public void deleteOrder(@PathVariable long orderId) {
+        customerOrderService.deleteOrderById(orderId);
     }
 
 }

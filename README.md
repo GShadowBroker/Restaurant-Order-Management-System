@@ -42,10 +42,11 @@ Para notificar quanto a mudanças na lista de pedidos, basta publicar uma mensag
 | GET    | /api/v1/customer |
 
 Retorna a lista de clientes cadastrados.
+
 | Parâmetro | Tipo |
-| ------------- | ------------------------------ |
-| limit | int |
-| offset | int |
+| --------- | ---- |
+| limit     | int  |
+| offset    | int  |
 
 Ex: /api/v1/customer?limit=10&offset=0
 
@@ -75,6 +76,7 @@ Retorna todos os pedidos cadastrados.
 | POST   | /api/v1/order |
 
 Cria novo pedido.
+
 Body:
 
 ```
@@ -127,10 +129,12 @@ Retorna todos os pratos cadastrados.
 | GET    | /api/v1/item/some |
 
 Retorna alguns pratos.
+
 | Parâmetro | Tipo |
-| ------------- | ------------------------------ |
-| limit | int |
-| offset | int |
+| --------- | ---- |
+| limit     | int  |
+| offset    | int  |
+
 Ex: /api/v1/item/some?limit=5&offset=0
 
 ---
@@ -140,11 +144,13 @@ Ex: /api/v1/item/some?limit=5&offset=0
 | GET    | /api/v1/item/search |
 
 Retorna uma lista de pratos cadastrados que correspondem ao termo de busca informado.
-| Parâmetro | Tipo |
-| ------------- | ------------------------------ |
-| term | String |
-| limit | int |
-| offset | int |
+
+| Parâmetro | Tipo   |
+| --------- | ------ |
+| term      | String |
+| limit     | int    |
+| offset    | int    |
+
 Ex: /api/v1/item/search?term=frango&limit=10&offset=0
 
 ## License

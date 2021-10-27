@@ -42,8 +42,13 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> searchItems(String searchTerm, int limit, int offset) {
-        log.info("searcherm is {}", searchTerm);
+        log.info("searchTerm is {}", searchTerm);
         return itemRepository.searchItems(searchTerm, PageRequest.of(offset, limit));
+    }
+
+    @Override
+    public Item createItem(Item item) {
+        return itemRepository.save(item);
     }
 
 }

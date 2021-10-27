@@ -1,6 +1,7 @@
 package app.netlify.gledyson.restaurant.controller;
 
 import app.netlify.gledyson.restaurant.model.Item;
+import app.netlify.gledyson.restaurant.model.ItemForm;
 import app.netlify.gledyson.restaurant.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,18 @@ public class ItemRestController {
     @CrossOrigin
     public List<Item> getAllItems() {
         return itemService.getAll();
+    }
+
+    @PostMapping
+    @CrossOrigin
+    public Item createItem(@RequestBody ItemForm form) {
+        return itemService.createItem(new Item(
+                form.getCode(),
+                form.getName(),
+                form.getDescription(),
+                form.getImageUrl(),
+                form.getPrice()
+        ));
     }
 
     @GetMapping("some")
@@ -38,4 +51,5 @@ public class ItemRestController {
     ) {
         return itemService.searchItems(term, limit, offset);
     }
+
 }

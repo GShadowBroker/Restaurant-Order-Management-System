@@ -124,6 +124,26 @@ Retorna todos os pratos cadastrados.
 
 ---
 
+| Método | Recurso      |
+| ------ | ------------ |
+| POST    | /api/v1/item |
+
+Salva um novo item no banco de dados.
+
+Body:
+
+```
+{
+    code: String,
+    name: String,
+    description: String,
+    imageUrl: String,
+    price: Integer
+}
+```
+
+---
+
 | Método | Recurso           |
 | ------ | ----------------- |
 | GET    | /api/v1/item/some |

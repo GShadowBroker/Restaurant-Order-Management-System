@@ -12,4 +12,6 @@ public interface ItemService {
     List<Item> getSome(int limit, int offset);
 
     List<Item> searchItems(String searchTerm, int limit, int offset);
+
+    Item createItem(Item item);
 }
